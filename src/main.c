@@ -3,56 +3,50 @@
 #include <string.h>
 #include <dyad.h>
 
-/* An echo server: Echos any data received by a client back to the client */
-
 int x;
 int y;
 
-static void onData(dyad_Event *e) {
+static void onLine(dyad_Event *e) {
 	dyad_write(e->stream, e->data, e->size);
 
-	char input[125];
-
+	char buffer[125];
 //	strncpy(input, e->data, e->size);
-	strncpy_s(input, 125, e->data, e->size);
+	strncpy_s(buffer, 125, e->data, e->size);
 
-	printf("[%s] \n", input);
+	printf("[%s] \n", buffer);
 
-	if(strcmp(input, "look") == 0)
+	if(strncmp(buffer, "look", 4) == 0)
 	{
-		dyad_writef(e->stream, "Pos: %i \n", x, y);
+		dyad_writef(e->stream, "## Pos: %i \r\n", x, y);
 	}
 
-	if(strcmp(input, "w") == 0)
+	if(strncmp(buffer, "w", 1) == 0)
 	{
 		x--;
-		dyad_writef(e->stream, "Moved to west.\n");
+		dyad_writef(e->stream, "## Moved to west.\r\n");
 	}
 
-	if(strcmp(input, "e") == 0)
+	if(strncmp(buffer, "e", 1) == 0)
 	{
 		x++;
-		dyad_writef(e->stream, "Moved to east.\n");
+		dyad_writef(e->stream, "## Moved to east.\r\n");
 	}
 }
 
 static void onTick(dyad_Event *e)
 {
-	printf("hehe");
-
 	if(e->stream == NULL)
 		return;
 
-	//dyad_writef(e->stream, "Pos: %i\n", x, y);
-
-	printf("haha");
+	dyad_writef(e->stream, "Pos: %i \r\n", x, y);
+	dyad_writef(e->stream, "7");
 }
 
 static void onAccept(dyad_Event *e) {
-	dyad_addListener(e->remote, DYAD_EVENT_DATA, onData, NULL);
+	dyad_addListener(e->remote, DYAD_EVENT_LINE, onLine, NULL);
 	dyad_addListener(e->remote, DYAD_EVENT_TICK, onTick, NULL);
 	dyad_writef(e->remote, "## Muta ##\r\n");
-	printf("New client connected!");
+	printf("New client connected! [%s]\n", e->msg);
 }
 
 static void onError(dyad_Event *e) {
