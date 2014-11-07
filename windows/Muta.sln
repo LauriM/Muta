@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30723.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Muta", "Muta\Muta.vcxproj", "{C0780CEB-3683-4A3A-A45F-F1D48D82F57A}"
+	ProjectSection(ProjectDependencies) = postProject
+		{93868C62-303F-4088-8547-F087112B079D} = {93868C62-303F-4088-8547-F087112B079D}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Dyad", "Dyad\Dyad.vcxproj", "{93868C62-303F-4088-8547-F087112B079D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C0780CEB-3683-4A3A-A45F-F1D48D82F57A}.Debug|Win32.ActiveCfg = Debug|Win32
+		{C0780CEB-3683-4A3A-A45F-F1D48D82F57A}.Debug|Win32.Build.0 = Debug|Win32
+		{C0780CEB-3683-4A3A-A45F-F1D48D82F57A}.Release|Win32.ActiveCfg = Release|Win32
+		{C0780CEB-3683-4A3A-A45F-F1D48D82F57A}.Release|Win32.Build.0 = Release|Win32
+		{93868C62-303F-4088-8547-F087112B079D}.Debug|Win32.ActiveCfg = Debug|Win32
+		{93868C62-303F-4088-8547-F087112B079D}.Debug|Win32.Build.0 = Debug|Win32
+		{93868C62-303F-4088-8547-F087112B079D}.Release|Win32.ActiveCfg = Release|Win32
+		{93868C62-303F-4088-8547-F087112B079D}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

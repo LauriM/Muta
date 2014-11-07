@@ -13,7 +13,8 @@ static void onData(dyad_Event *e) {
 
 	char input[125];
 
-	strncpy(input, e->data, e->size);
+//	strncpy(input, e->data, e->size);
+	strncpy_s(input, 125, e->data, e->size);
 
 	printf("[%s] \n", input);
 

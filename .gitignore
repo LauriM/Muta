@@ -45,3 +45,6 @@ premake4
 *.dll
 
 arial.ttf
+/windows/Debug
+/windows/Dyad/Debug
+/windows/Muta/Debug
