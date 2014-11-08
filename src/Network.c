@@ -10,6 +10,8 @@ struct ServerState *initServer()
 
 	server->server = dyad_newStream();
 
+	dyad_setUpdateTimeout(0.05);
+
 //	dyad_addListener(server->server, DYAD_EVENT_ERROR, onError, NULL);
 	dyad_addListener(server->server, DYAD_EVENT_ACCEPT, onAccept, server);
 	dyad_listen(server->server, 8000);
@@ -26,10 +28,10 @@ void uninitServer(struct ServerState *server)
 
 void updateServer(struct ServerState *server)
 {
-	dyad_update();
+	dyad_update(25);
 }
 
-static void onAccept(dyad_Event *e) {
+void onAccept(dyad_Event *e) {
 	//dyad_addListener(e->remote, DYAD_EVENT_LINE, onLine, NULL);
 
 	// Get server from the userdata
@@ -43,7 +45,12 @@ static void onAccept(dyad_Event *e) {
 
 	struct ClientState *client = malloc(sizeof(struct ClientState));
 
-	client->client = e->stream;
+	client->client = e->remote;
 
 	server->onConnectionCallback(client);
+}
+
+void writeLine(struct ClientState *clientState, const char *line)
+{
+	dyad_writef(clientState->client, "%s\r\n", line);
 }

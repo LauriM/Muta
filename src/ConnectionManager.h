@@ -51,7 +51,7 @@ public:
 	// Send data to specific client
 	void sendLine(ClientState *client, String line);
 
-	// Broadcast lien to all clients
+	// Broadcast line to all clients
 	void broadcast(String line);
 };
 

@@ -25,6 +25,8 @@ struct ServerState
 	ConnectionCallback onConnectionCallback;
 };
 
+//TODO: Somekind of prefix for these functions!
+
 #ifdef __cplusplus
 extern "C"
 {
@@ -36,6 +38,8 @@ extern "C"
 	void updateServer(struct ServerState *server);
 
 	void onAccept(dyad_Event *e);
+
+	void writeLine(struct ClientState *clientState, const char *line);
 
 #ifdef __cplusplus
 }
