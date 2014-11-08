@@ -1,3 +1,5 @@
+#include "precompiled.h"
+
 #include "ConnectionManager.h"
 
 int main()

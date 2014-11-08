@@ -3,9 +3,26 @@
 #include <string.h>
 #include <dyad.h>
 
+/**
+ * Server/Client are owned by the network functions.
+ *
+ * Using classes should remember to call the cleanup functions
+ *
+ * NOTE: There can only be one server instance per executable running!
+ */
+
+struct ClientState
+{
+	dyad_Stream *client;
+};
+
+typedef void (*ConnectionCallback)(struct ClientState*);
+
 struct ServerState
 {
 	dyad_Stream *server;
+
+	ConnectionCallback onConnectionCallback;
 };
 
 #ifdef __cplusplus
@@ -17,6 +34,8 @@ extern "C"
 	void uninitServer(struct ServerState *server);
 
 	void updateServer(struct ServerState *server);
+
+	void onAccept(dyad_Event *e);
 
 #ifdef __cplusplus
 }
