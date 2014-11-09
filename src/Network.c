@@ -31,8 +31,18 @@ void updateServer(struct ServerState *server)
 	dyad_update(25);
 }
 
+static void onLine(dyad_Event *e) {
+	char buffer[125]; //max buffer size is 125
+	strncpy_s(buffer, 125, e->data, e->size);
+	printf("[%s] \n", buffer);
+
+	struct ServerState *server = e->udata;
+
+	server->onLineCallback(e->stream, buffer);
+}
+
 void onAccept(dyad_Event *e) {
-	//dyad_addListener(e->remote, DYAD_EVENT_LINE, onLine, NULL);
+	dyad_addListener(e->remote, DYAD_EVENT_LINE, onLine, e->udata);
 
 	// Get server from the userdata
 	struct ServerState *server = e->udata;
@@ -43,14 +53,10 @@ void onAccept(dyad_Event *e) {
 	//TODO: log message
 	printf("New client connected! [%s]\n", e->msg);
 
-	struct ClientState *client = malloc(sizeof(struct ClientState));
-
-	client->client = e->remote;
-
-	server->onConnectionCallback(client);
+	server->onConnectionCallback(e->remote);
 }
 
-void writeLine(struct ClientState *clientState, const char *line)
+void writeLine(ClientStream *clientStream, const char *line)
 {
-	dyad_writef(clientState->client, "%s\r\n", line);
+	dyad_writef(clientStream, "%s\r\n", line);
 }

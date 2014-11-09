@@ -10,7 +10,7 @@
  */
 struct Client 
 {
-	ClientState *clientState;
+	ClientStream *clientStream;
 	// connection time
 	// playerCharacther, etc
 };
@@ -35,21 +35,25 @@ public:
 
 	void update();
 
+	Client *getClientForClientStream(ClientStream *stream);
+
 private:
 	void addClient(Client client);
+	void onLine(ClientStream *stream, const String &line);
 
 public:
 
 	// When connection/disconnect happens
 	// Static because these functions are called from C
-	static void staticOnConnection(ClientState *clientState);
-	static void staticOnDisconnect(ClientState *clientState); //TODO: call network commands to free the client struct
+	static void staticOnConnection(ClientStream *clientStream);
+	static void staticOnDisconnect(ClientStream *clientStream); //TODO: call network commands to free the client struct
 
 	// When a line is received from the client
-	static void staticOnLine(ClientState *clientState);
+	static void staticOnLine(ClientStream *clientStream, char *line);
 
 	// Send data to specific client
-	void sendLine(ClientState *client, String line);
+	void sendLine(Client *client, const String &line);
+	void sendLine(ClientStream *client, const String &line);
 
 	// Broadcast line to all clients
 	void broadcast(String line);

@@ -11,18 +11,17 @@
  * NOTE: There can only be one server instance per executable running!
  */
 
-struct ClientState
-{
-	dyad_Stream *client;
-};
+typedef dyad_Stream ClientStream;
 
-typedef void (*ConnectionCallback)(struct ClientState*);
+typedef void (*ConnectionCallback)(ClientStream*);
+typedef void (*LineCallback)(ClientStream*, char*);
 
 struct ServerState
 {
 	dyad_Stream *server;
 
 	ConnectionCallback onConnectionCallback;
+	LineCallback onLineCallback;
 };
 
 //TODO: Somekind of prefix for these functions!
@@ -38,8 +37,9 @@ extern "C"
 	void updateServer(struct ServerState *server);
 
 	void onAccept(dyad_Event *e);
+	void onLine(dyad_Event *e);
 
-	void writeLine(struct ClientState *clientState, const char *line);
+	void writeLine(ClientStream *clientState, const char *line);
 
 #ifdef __cplusplus
 }
