@@ -2,16 +2,11 @@
 
 #include "Room.h"
 #include "Action.h"
-
-#include "Scene.h"
-#include "Network.h"
-#include <vector>
-
-inline ActionErrorCode _action_functionlook(Scene *scene, Client *client, const std::vector<String> args); 
+#include "ConnectionManager.h"
 
 ACTION(look)
 {
-	printf("player looks around.");
+	ConnectionManager::sendLine(client, "You look around.");
 
 	return ACTION_OK;
 }

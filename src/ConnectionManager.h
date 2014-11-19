@@ -56,8 +56,8 @@ public:
 	static void staticOnLine(ClientStream *clientStream, char *line);
 
 	// Send data to specific client
-	void sendLine(Client *client, const String &line);
-	void sendLine(ClientStream *client, const String &line);
+	static void sendLine(Client *client, const String &line);
+	static void sendLine(ClientStream *client, const String &line);
 
 	// Broadcast line to all clients
 	void broadcast(String line);
