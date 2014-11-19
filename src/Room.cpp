@@ -18,3 +18,10 @@ void Room::addExit(Direction dir, Room *room)
 {
 	exits[dir] = room;
 }
+
+Room *Room::getExit(Direction dir)
+{
+	assert(dir < Direction::DIR_COUNT);
+
+	return exits[dir];
+}

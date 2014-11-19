@@ -17,6 +17,7 @@ enum ActionErrorCode
 	ACTION_OK = 0,
 	INVALID_ACTION,
 	INVALID_PARAMS,
+	BLOCKED,
 };
 
 class Action

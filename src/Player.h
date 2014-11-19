@@ -1,6 +1,8 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
+#include "Directions.h"
+
 class Room;
 struct Client;
 
@@ -24,6 +26,8 @@ public:
 
 	Room *getCurrentRoom() const { return room; }
 	Client *getClient() const { return client; }
+
+	bool move(Direction dir);
 };
 
 #endif

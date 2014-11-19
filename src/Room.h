@@ -25,6 +25,7 @@ public:
 	const String &getDescription() const { return description; }
 
 	void addExit(Direction dir, Room *room);
+	Room *getExit(Direction dir);
 };
 
 #endif
