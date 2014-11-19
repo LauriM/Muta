@@ -28,6 +28,9 @@ public:
 	Client *getClient() const { return client; }
 
 	bool move(Direction dir);
+
+	void tellExits();
+	void tellLook();
 };
 
 #endif
