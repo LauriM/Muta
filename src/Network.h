@@ -1,3 +1,6 @@
+#ifndef NETWORK_H
+#define NETWORK_H
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -126,3 +129,5 @@ int networkMain(void) {
 	return 0;
 }
 */
+
+#endif

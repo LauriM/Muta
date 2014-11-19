@@ -2,13 +2,16 @@
 
 #include "ConnectionManager.h"
 
+#include "ActionManager.h"
+
 namespace global
 {
 	ConnectionManager *g_connectionManager;
 }
 
-ConnectionManager::ConnectionManager()
-	: serverState(NULL)
+ConnectionManager::ConnectionManager(ActionManager *actionManager)
+	: actionManager(actionManager)
+	, serverState(NULL)
 {
 	serverState = initServer();
 	serverState->onConnectionCallback = &staticOnConnection;
@@ -39,20 +42,7 @@ void ConnectionManager::onLine(ClientStream *clientStream, const String &line)
 {
 	Client *client = getClientForClientStream(clientStream);
 
-	// dispatch command!
-
-	if (line == "look")
-	{
-		sendLine(client, "You look around");
-	}
-
-	if (line == "uptime")
-	{
-		sendLine(client, "Uptime is not implemented");
-	}
-
-	if (line.substr(0, 3) == "say")
-		broadcast(line.substr(4, line.length() - 4));
+	actionManager->execute(line, client);
 }
 
 Client *ConnectionManager::getClientForClientStream(ClientStream *state)

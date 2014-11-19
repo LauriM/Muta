@@ -7,9 +7,9 @@
 
 int main()
 {
-	ConnectionManager connectionManager;
-
 	Scene scene;
+	ActionManager actionManager(&scene);
+	ConnectionManager connectionManager(&actionManager);
 
 	unsigned i = 0;
 	unsigned x = 'a';

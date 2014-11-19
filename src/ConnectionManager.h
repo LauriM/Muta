@@ -5,6 +5,8 @@
 
 #include <vector>
 
+class ActionManager;
+
 /**
  * Represents single connection
  */
@@ -21,12 +23,14 @@ struct Client
 class ConnectionManager
 {
 private:
+	ActionManager *actionManager;
+
 	ServerState *serverState;
 
 	std::vector<Client> clients;
 
 public:
-	ConnectionManager();
+	ConnectionManager(ActionManager *actionManager);
 
 	~ConnectionManager()
 	{
