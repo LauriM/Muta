@@ -73,6 +73,7 @@
     <ClCompile Include="..\..\src\Network.c" />
     <ClCompile Include="..\..\src\Network.h" />
     <ClCompile Include="..\..\src\Room.cpp" />
+    <ClCompile Include="..\..\src\Scene.cpp" />
     <ClCompile Include="..\..\src\World.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -80,6 +81,7 @@
     <ClInclude Include="..\..\src\Directions.h" />
     <ClInclude Include="..\..\src\precompiled.h" />
     <ClInclude Include="..\..\src\Room.h" />
+    <ClInclude Include="..\..\src\Scene.h" />
     <ClInclude Include="..\..\src\World.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

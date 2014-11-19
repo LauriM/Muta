@@ -1,12 +1,13 @@
 #include "precompiled.h"
 
 #include "ConnectionManager.h"
-#include "World.h"
+#include "Scene.h"
 
 int main()
 {
 	ConnectionManager connectionManager;
-	World world;
+
+	Scene scene;
 
 	unsigned i = 0;
 	unsigned x = 'a';
