@@ -3,14 +3,16 @@
 #include "ConnectionManager.h"
 
 #include "ActionManager.h"
+#include "PlayerManager.h"
 
 namespace global
 {
 	ConnectionManager *g_connectionManager;
 }
 
-ConnectionManager::ConnectionManager(ActionManager *actionManager)
+ConnectionManager::ConnectionManager(ActionManager *actionManager, PlayerManager *playerManager)
 	: actionManager(actionManager)
+	, playerManager(playerManager)
 	, serverState(NULL)
 {
 	serverState = initServer();
@@ -62,6 +64,8 @@ void ConnectionManager::addClient(Client client)
 	clients.push_back(client);
 
 	broadcast("new client connected");
+
+	playerManager->clientConnected(&clients[clients.size()- 1]);
 }
 
 void ConnectionManager::sendLine(Client *client, const String &line)

@@ -11,6 +11,8 @@ private:
 
 public:
 	World();
+
+	Room *getRootNode() const { return rootNode; }
 };
 
 #endif

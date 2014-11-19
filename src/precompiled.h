@@ -1,3 +1,4 @@
+#include <assert.h>
 #include <string>
 
 typedef std::string String;

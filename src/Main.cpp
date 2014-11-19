@@ -9,7 +9,7 @@ int main()
 {
 	Scene scene;
 	ActionManager actionManager(&scene);
-	ConnectionManager connectionManager(&actionManager);
+	ConnectionManager connectionManager(&actionManager, scene.getPlayerManager());
 
 	unsigned i = 0;
 	unsigned x = 'a';

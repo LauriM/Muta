@@ -6,6 +6,7 @@
 #include <vector>
 
 class ActionManager;
+class PlayerManager;
 
 /**
  * Represents single connection
@@ -24,13 +25,14 @@ class ConnectionManager
 {
 private:
 	ActionManager *actionManager;
+	PlayerManager *playerManager;
 
 	ServerState *serverState;
 
 	std::vector<Client> clients;
 
 public:
-	ConnectionManager(ActionManager *actionManager);
+	ConnectionManager(ActionManager *actionManager, PlayerManager *playerManager);
 
 	~ConnectionManager()
 	{

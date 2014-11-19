@@ -73,6 +73,8 @@
     <ClCompile Include="..\..\src\Main.cpp" />
     <ClCompile Include="..\..\src\Network.c" />
     <ClCompile Include="..\..\src\Network.h" />
+    <ClCompile Include="..\..\src\Player.cpp" />
+    <ClCompile Include="..\..\src\PlayerManager.cpp" />
     <ClCompile Include="..\..\src\Room.cpp" />
     <ClCompile Include="..\..\src\Scene.cpp" />
     <ClCompile Include="..\..\src\StringUtil.cpp" />
@@ -83,6 +85,8 @@
     <ClInclude Include="..\..\src\ActionManager.h" />
     <ClInclude Include="..\..\src\ConnectionManager.h" />
     <ClInclude Include="..\..\src\Directions.h" />
+    <ClInclude Include="..\..\src\Player.h" />
+    <ClInclude Include="..\..\src\PlayerManager.h" />
     <ClInclude Include="..\..\src\precompiled.h" />
     <ClInclude Include="..\..\src\Room.h" />
     <ClInclude Include="..\..\src\Scene.h" />
