@@ -31,8 +31,10 @@ Player *PlayerManager::getPlayerByClient(Client *client)
 	assert(client != NULL);
 
 	for (unsigned i = 0; i < players.size(); ++i)
+	{
 		if (players[i].getClient() == client)
 			return &players[i];
+	}
 
 	assert(true); // could not find the player by client, this is usually something baad!
 	return NULL;

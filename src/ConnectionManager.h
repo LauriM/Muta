@@ -29,7 +29,7 @@ private:
 
 	ServerState *serverState;
 
-	std::vector<Client> clients;
+	std::vector<Client*> clients;
 
 public:
 	ConnectionManager(ActionManager *actionManager, PlayerManager *playerManager);
@@ -44,7 +44,7 @@ public:
 	Client *getClientForClientStream(ClientStream *stream);
 
 private:
-	void addClient(Client client);
+	void addClient(Client *client);
 	void onLine(ClientStream *stream, const String &line);
 
 public:

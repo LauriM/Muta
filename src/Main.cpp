@@ -17,15 +17,6 @@ int main()
 	for (;;)
 	{
 		connectionManager.update();
-
-		i++;
-		if (i > 50)
-		{
-			i = 0;
-			x++;
-			String lol("broadcast: ");
-			connectionManager.broadcast(lol);
-		}
 	}
 
 	return 0;

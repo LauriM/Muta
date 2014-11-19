@@ -28,9 +28,9 @@ void ConnectionManager::update()
 
 void ConnectionManager::staticOnConnection(ClientStream *clientStream)
 {
-	Client client;
+	Client *client = new Client();
 
-	client.clientStream = clientStream;
+	client->clientStream = clientStream;
 
 	global::g_connectionManager->addClient(client);
 }
@@ -51,21 +51,21 @@ Client *ConnectionManager::getClientForClientStream(ClientStream *state)
 {
 	for (unsigned i = 0; i < clients.size(); ++i)
 	{
-		if (clients[i].clientStream == state)
-			return &clients[i];
+		if (clients[i]->clientStream == state)
+			return clients[i];
 	}
 
 	return NULL;
 }
 
-void ConnectionManager::addClient(Client client)
+void ConnectionManager::addClient(Client *client)
 {
 	printf("Client added to the vector\n");
 	clients.push_back(client);
 
 	broadcast("new client connected");
 
-	playerManager->clientConnected(&clients[clients.size()- 1]);
+	playerManager->clientConnected(client);
 }
 
 void ConnectionManager::sendLine(Client *client, const String &line)
@@ -81,5 +81,5 @@ void ConnectionManager::sendLine(ClientStream *client, const String &line)
 void ConnectionManager::broadcast(String line)
 {
 	for (unsigned i = 0; i < clients.size(); ++i)
-		writeLine(clients[i].clientStream, line.c_str());
+		writeLine(clients[i]->clientStream, line.c_str());
 }
