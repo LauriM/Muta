@@ -7,8 +7,9 @@
 class Scene;
 struct Client;
 
-// Playermanager handles the master list of players
+typedef std::vector<Player*> PlayerList;
 
+// Playermanager handles the master list of players
 class PlayerManager
 {
 private:
@@ -23,6 +24,8 @@ public:
 	void clientDisconnected(Client *client);
 
 	Player *getPlayerByClient(Client *client);
+
+	void getPlayersInRoom(PlayerList &players, const Room *room);
 };
 
 #endif

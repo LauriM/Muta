@@ -57,6 +57,13 @@ ACTION(e)
 	{
 		player->tellLook();
 		player->tellExits();
+
+		PlayerList players;
+		scene->getPlayerManager()->getPlayersInRoom(players, player->getCurrentRoom());
+
+		for (unsigned i = 0; i < players.size(); ++i)
+			ConnectionManager::sendLine(players[i]->getClient(), "player has arrived to the room.");
+
 		return ACTION_OK;
 	}
 

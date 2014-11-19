@@ -39,3 +39,14 @@ Player *PlayerManager::getPlayerByClient(Client *client)
 	assert(true); // could not find the player by client, this is usually something baad!
 	return NULL;
 }
+
+void PlayerManager::getPlayersInRoom(PlayerList &players, const Room *room)
+{
+	for (unsigned i = 0; i < players.size(); i++)
+	{
+		if (players[i]->getCurrentRoom() == room)
+		{
+			players.push_back(players[i]);
+		}
+	}
+}
