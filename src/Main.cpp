@@ -1,7 +1,9 @@
 #include "precompiled.h"
 
 #include "ConnectionManager.h"
+#include "ActionManager.h"
 #include "Scene.h"
+#include "Action.h"
 
 int main()
 {

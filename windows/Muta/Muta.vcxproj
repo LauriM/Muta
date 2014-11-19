@@ -77,6 +77,8 @@
     <ClCompile Include="..\..\src\World.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\src\Action.h" />
+    <ClInclude Include="..\..\src\ActionManager.h" />
     <ClInclude Include="..\..\src\ConnectionManager.h" />
     <ClInclude Include="..\..\src\Directions.h" />
     <ClInclude Include="..\..\src\precompiled.h" />
