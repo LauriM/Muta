@@ -2,21 +2,13 @@
 #define CONNECTIONMANAGER_H
 
 #include "network.h"
+#include "Client.h"
 
 #include <vector>
 
 class ActionManager;
 class PlayerManager;
-
-/**
- * Represents single connection
- */
-struct Client 
-{
-	ClientStream *clientStream;
-	// connection time
-	// playerCharacther, etc
-};
+class Authentication;
 
 /**
  * Manages all client connections and provides interface and receive messages from them.
@@ -26,13 +18,14 @@ class ConnectionManager
 private:
 	ActionManager *actionManager;
 	PlayerManager *playerManager;
+	Authentication *authentication;
 
 	ServerState *serverState;
 
 	std::vector<Client*> clients;
 
 public:
-	ConnectionManager(ActionManager *actionManager, PlayerManager *playerManager);
+	ConnectionManager(ActionManager *actionManager, PlayerManager *playerManager, Authentication *authentication);
 
 	~ConnectionManager()
 	{

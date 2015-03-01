@@ -11,6 +11,7 @@ PlayerManager::PlayerManager(Scene *scene)
 void PlayerManager::clientConnected(Client *client)
 {
 	players.push_back(Player(client, scene->getWorld()->getRootNode()));
+	printf("Player logged into the world!\n");
 }
 
 void PlayerManager::clientDisconnected(Client *client)

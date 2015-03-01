@@ -69,6 +69,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\ActionManager.cpp" />
+    <ClCompile Include="..\..\src\Authentication.cpp" />
     <ClCompile Include="..\..\src\ConnectionManager.cpp" />
     <ClCompile Include="..\..\src\Main.cpp" />
     <ClCompile Include="..\..\src\Network.c" />
@@ -83,6 +84,8 @@
   <ItemGroup>
     <ClInclude Include="..\..\src\Action.h" />
     <ClInclude Include="..\..\src\ActionManager.h" />
+    <ClInclude Include="..\..\src\Authentication.h" />
+    <ClInclude Include="..\..\src\Client.h" />
     <ClInclude Include="..\..\src\ConnectionManager.h" />
     <ClInclude Include="..\..\src\Directions.h" />
     <ClInclude Include="..\..\src\Player.h" />

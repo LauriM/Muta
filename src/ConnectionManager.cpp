@@ -4,16 +4,18 @@
 
 #include "ActionManager.h"
 #include "PlayerManager.h"
+#include "Authentication.h"
 
 namespace global
 {
 	ConnectionManager *g_connectionManager;
 }
 
-ConnectionManager::ConnectionManager(ActionManager *actionManager, PlayerManager *playerManager)
+ConnectionManager::ConnectionManager(ActionManager *actionManager, PlayerManager *playerManager, Authentication *authentication)
 	: actionManager(actionManager)
 	, playerManager(playerManager)
 	, serverState(NULL)
+	, authentication(authentication)
 {
 	serverState = initServer();
 	serverState->onConnectionCallback = &staticOnConnection;
@@ -33,6 +35,12 @@ void ConnectionManager::staticOnConnection(ClientStream *clientStream)
 	client->clientStream = clientStream;
 
 	global::g_connectionManager->addClient(client);
+
+	// Send login screen to client
+	// TODO: motd.txt
+
+	sendLine(client, "LOGIN!");
+	sendLine(client, "Username: ");
 }
 
 void ConnectionManager::staticOnLine(ClientStream *clientStream, char*line)
@@ -44,7 +52,34 @@ void ConnectionManager::onLine(ClientStream *clientStream, const String &line)
 {
 	Client *client = getClientForClientStream(clientStream);
 
-	actionManager->execute(line, client);
+	switch (client->connectionState)
+	{
+	case DISCONNECTED:
+		printf("wtf?");
+		break;
+	case AUTH_DONE:
+		actionManager->execute(line, client);
+		break;
+	case MOTD:
+		sendLine(client, "########");
+		sendLine(client, "# MOTD #");
+		sendLine(client, "########");
+		sendLine(client, "");
+	case LOGIN_SCREEN:
+		if (authentication->authenticate(line, line) )//hack
+		{
+			client->connectionState = AUTH_DONE;
+
+			playerManager->clientConnected(client);
+
+			broadcast(String(line) + String(" logged in"));
+		}
+		else
+		{
+			sendLine(client, "Wrong password!\n");
+		}
+		break;
+	}
 }
 
 Client *ConnectionManager::getClientForClientStream(ClientStream *state)
@@ -63,9 +98,9 @@ void ConnectionManager::addClient(Client *client)
 	printf("Client added to the vector\n");
 	clients.push_back(client);
 
-	broadcast("new client connected");
+	client->connectionState = LOGIN_SCREEN;
 
-	playerManager->clientConnected(client);
+	broadcast("new client connected!");
 }
 
 void ConnectionManager::sendLine(Client *client, const String &line)
